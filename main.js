@@ -1,68 +1,57 @@
-class Nodo{
-    constructor(valor){
-        this.valor=valor;
-        this.adyacentes=[];
-        this.valoresAristas=[];
-    }
-}
+let numeros=[8,10,45,2,33,90,50,11,6,26];
+console.log(numeros);
 
-class Grafo{
-    constructor(){
-      this.nodos=[];  
-    }
-    agregarNodo(valor){
-        let nodo=new Nodo(valor);
-        this.nodos.push(nodo);
-    }
-
-    agregarArista(valor1,valor2,valorArista){
-        let nodo1=this.buscarNodo(valor1);
-        let nodo2=this.buscarNodo(valor2);
-        nodo1.adyacentes.push(nodo2);
-        nodo2.adyacentes.push(nodo1);
-        nodo1.valoresAristas.push(valorArista);
-        nodo2.valoresAristas.push(valorArista);
-    }
-
-    buscarNodo(valor){
-    for(let i=0;i<this.nodos.length;i++){
-        if(this.nodos[i].valor==valor){
-            return this.nodos[i];
-            }
-        } 
-        return null;  
-    }
-    buscarArista(valor1,valor2){
-        let nodo1=this.buscarNodo(valor1);
-        //let nodo2=this.buscarNodo(valor2); no es necesaria la linea
-        for(let i=0;i<nodo1.adyacentes.length;i++){
-            if(nodo1.adyacentes[i].valor==valor2){
-                return nodo1.valoresAristas[i];
+function burbuja(arreglo){
+    let orden=false;
+    for (let i = 0; i<arreglo.length;i++){
+        orden=true;
+        for (let j=0;j<arreglo.length-i-1;j++){
+            if(arreglo[j]>arreglo[j+1]){
+                const valor=arreglo[j+1];
+                arreglo[j+1]=arreglo[j];
+                arreglo[j]=valor
+                orden=false;
             }
         }
-        return null;
     }
-
+    return arreglo;
 }
-let grafo=new Grafo();
-grafo.agregarNodo("A");
-grafo.agregarNodo("B");
-grafo.agregarNodo("C");
-grafo.agregarNodo("D");
-grafo.agregarNodo("E");
-grafo.agregarArista("A","B",69);
-grafo.agregarArista("A","C",50);
-grafo.agregarArista("A","D",85);
-grafo.agregarArista("A","E",100);
-grafo.agregarArista("C","B",72);
-grafo.agregarArista("C","D",60);
-grafo.agregarArista("E","B",90);
 
+let EnOrden=burbuja(numeros);
+console.log("resultado de Ordenamiento burbuja = "+EnOrden);
 
-if(grafo.buscarArista("B","E")!=null){
-    console.log("Existente");
-    console.log("el valor de la arista es: "+grafo.buscarArista("B","E"));
+function seleccion(arreglo) {
+    for(let i=0;i<arreglo.length;i++){
+        minimo=arreglo[i];
+        ind=i;
+        for(let j=i+1;j<arreglo.length;j++){
+            if(minimo>arreglo[j]){
+                minimo=arreglo[j];
+                ind=j;
+            }
+        }
+        if(ind!==i){
+            valor=arreglo[i];
+            arreglo[i]=arreglo[ind];
+            arreglo[ind]=valor;
+        }
+    }
+    return arreglo;
 }
-else{
-    console.log("No Existente")
+let EnOrden2=seleccion(numeros);
+console.log("resultado de Ordenamiento por Seleccion = "+EnOrden2);
+
+function Insercion(arreglo){
+    for (let i = 1; i<arreglo.length;i++){
+        const valor=arreglo[i];
+        let j = i-1;
+        for(j; j>=0 && arreglo[j]>valor;j--){
+            arreglo[j+1]=arreglo[j];
+            j=j-1;
+        }
+        arreglo[j+1]=arreglo[i];
+    }
+    return arreglo;
 }
+let EnOrden3=Insercion(numeros);
+console.log("resultado de Ordenamiento por Insercion = "+EnOrden3);
