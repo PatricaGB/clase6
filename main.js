@@ -2,15 +2,12 @@ let numeros=[8,10,45,2,33,90,50,11,6,26];
 console.log(numeros);
 
 function burbuja(arreglo){
-    let orden=false;
     for (let i = 0; i<arreglo.length;i++){
-        orden=true;
         for (let j=0;j<arreglo.length-i-1;j++){
             if(arreglo[j]>arreglo[j+1]){
                 const valor=arreglo[j+1];
                 arreglo[j+1]=arreglo[j];
                 arreglo[j]=valor
-                orden=false;
             }
         }
     }
